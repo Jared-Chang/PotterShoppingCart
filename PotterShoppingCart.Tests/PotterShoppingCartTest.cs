@@ -9,28 +9,8 @@ namespace PotterShoppingCart.Tests
 
         public int Checkout()
         {
-            switch (_shoppingCart.Count)
-            {
-                case 1:
-                    return 100;
-
-                case 2:
-                    return 190;
-
-                case 3:
-                    return 270;
-
-                case 4:
-                    GetPotterPrice(out var price1);
-                    return price1;
-
-                case 5:
-                    GetPotterPrice(out var price2);
-                    return price2;
-
-                default:
-                    return 0;
-            }
+            GetPotterPrice(out var price);
+            return price;
         }
 
         private void GetPotterPrice(out int checkout)
