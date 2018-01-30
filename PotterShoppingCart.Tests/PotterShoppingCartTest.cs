@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace PotterShoppingCart.Tests
 {
@@ -37,13 +38,28 @@ namespace PotterShoppingCart.Tests
 
     public class BookStore
     {
+        private List<Book> _shoppingCart = new List<Book>();
+
         public void PutInShoppingCart(string bookName, int episode, int number)
         {
+            _shoppingCart.Add(new Book(bookName, episode));
+        }
+
+        public class Book
+        {
+            public Book(string bookName, int episode)
+            {
+            }
         }
 
         public int Checkout()
         {
-            return 100;
+            if (_shoppingCart.Count == 1)
+                return 100;
+            else
+            {
+                return 190;
+            }
         }
     }
 }
