@@ -9,7 +9,20 @@ namespace PotterShoppingCart.Tests
 
         public int Checkout()
         {
-            return _shoppingCart.Count == 1 ? 100 : 190;
+            switch (_shoppingCart.Count)
+            {
+                case 1:
+                    return 100;
+
+                case 2:
+                    return 190;
+
+                case 3:
+                    return 270;
+
+                default:
+                    return 0;
+            }
         }
 
         public void PutInShoppingCart(string bookName, int episode, int number)
