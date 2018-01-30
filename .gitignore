@@ -9,3 +9,5 @@
 *.suo
 /PotterShoppingCart.Tests/bin/Debug
 /PotterShoppingCart.Tests/obj/Debug
+/BookStoreLib/obj/Debug
+/BookStoreLib/bin/Debug

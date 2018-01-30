@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PotterShoppingCart.Tests
+namespace BookStoreNS
 {
-    public  interface IPriceCalculator
+    public interface IPriceCalculator
     {
         int GetPrice(List<BookStore.Book> shoppingCart);
     }

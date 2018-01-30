@@ -53,15 +53,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BookStore.cs" />
-    <Compile Include="BookStoreFacotry.cs" />
-    <Compile Include="IPriceCalculator.cs" />
-    <Compile Include="PotterPriceCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PotterShoppingCartTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="User Story.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookStoreLib\BookStoreLib.csproj">
+      <Project>{ff9462b2-9bed-4f9e-b175-794641fa9b69}</Project>
+      <Name>BookStoreLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

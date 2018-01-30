@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PotterShoppingCart.Tests
+namespace BookStoreNS
 {
     public class BookStore
     {

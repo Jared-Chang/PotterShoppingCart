@@ -1,4 +1,4 @@
-﻿namespace PotterShoppingCart.Tests
+﻿namespace BookStoreNS
 {
     public class BookStoreFacotry
     {
