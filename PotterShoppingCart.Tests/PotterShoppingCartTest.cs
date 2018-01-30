@@ -6,9 +6,9 @@ namespace PotterShoppingCart.Tests
     public class BookStore
     {
         private List<Book> _shoppingCart = new List<Book>();
-        private PotterPriceCalculator _priceCalculator;
+        private IPriceCalculator _priceCalculator;
 
-        public BookStore(PotterPriceCalculator priceCalculator)
+        public BookStore(IPriceCalculator priceCalculator)
         {
             _priceCalculator = priceCalculator;
         }

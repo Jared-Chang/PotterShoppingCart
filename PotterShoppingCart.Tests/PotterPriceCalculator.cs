@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PotterShoppingCart.Tests
 {
-    public class PotterPriceCalculator
+    public class PotterPriceCalculator : IPriceCalculator
     {
         private readonly int _potterPrice = 100;
         private readonly List<double> _potterOff = new List<double> { 1, 1, .95, .9, .8, .75 };
