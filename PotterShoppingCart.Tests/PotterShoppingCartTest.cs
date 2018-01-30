@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace PotterShoppingCart.Tests
@@ -21,14 +22,8 @@ namespace PotterShoppingCart.Tests
             {
                 numberOfDiffEpisode = 0;
 
-                for (int j = 0; j < array.Length; j++)
-                {
-                    if (array[j] > 0)
-                    {
-                        array[j]--;
-                        numberOfDiffEpisode++;
-                    }
-                }
+                numberOfDiffEpisode = Array.FindAll(array, x => x > 0).Length;
+                array = Array.ConvertAll(array, x => x - 1);
 
                 price += (int)(numberOfDiffEpisode * _potterOff[numberOfDiffEpisode] * _potterPrice);
             } while (numberOfDiffEpisode != 0);
