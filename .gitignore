@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.suo
+/PotterShoppingCart.Tests/bin/Debug
+/PotterShoppingCart.Tests/obj/Debug
