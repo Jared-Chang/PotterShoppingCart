@@ -102,6 +102,23 @@ namespace PotterShoppingCart.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void BuyAllPotter()
+        {
+            var bookStore = GetBookStore();
+
+            PutOnePotterToShoppingCart(bookStore, 1);
+            PutOnePotterToShoppingCart(bookStore, 2);
+            PutOnePotterToShoppingCart(bookStore, 3);
+            PutOnePotterToShoppingCart(bookStore, 4);
+            PutOnePotterToShoppingCart(bookStore, 5);
+            var expected = 375;
+
+            var actual = bookStore.Checkout();
+
+            Assert.AreEqual(expected, actual);
+        }
+
         private BookStore GetBookStore()
         {
             return new BookStore();
