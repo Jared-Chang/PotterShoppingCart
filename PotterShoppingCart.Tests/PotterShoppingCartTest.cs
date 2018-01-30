@@ -9,11 +9,6 @@ namespace PotterShoppingCart.Tests
 
         public int Checkout()
         {
-            return GetPotterPrice();
-        }
-
-        private int GetPotterPrice()
-        {
             int price = 0;
             int[] array = new int[5];
             _shoppingCart.ForEach(book => array[book.Episode - 1]++);
