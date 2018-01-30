@@ -20,6 +20,9 @@ namespace PotterShoppingCart.Tests
                 case 3:
                     return 270;
 
+                case 4:
+                    return 320;
+
                 default:
                     return 0;
             }
