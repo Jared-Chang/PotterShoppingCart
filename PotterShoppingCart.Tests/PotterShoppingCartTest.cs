@@ -29,7 +29,7 @@ namespace PotterShoppingCart.Tests
 
         public int Checkout()
         {
-            return 0;
+            return 100;
         }
     }
 }
