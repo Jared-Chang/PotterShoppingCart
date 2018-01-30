@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 
 namespace PotterShoppingCart.Tests
@@ -7,28 +6,16 @@ namespace PotterShoppingCart.Tests
     public class BookStore
     {
         private List<Book> _shoppingCart = new List<Book>();
-        private readonly int _potterPrice = 100;
-        private readonly List<double> _potterOff = new List<double> { 1, 1, .95, .9, .8, .75 };
+        private PotterPriceCalculator _priceCalculator;
+
+        public BookStore(PotterPriceCalculator priceCalculator)
+        {
+            _priceCalculator = priceCalculator;
+        }
 
         public int Checkout()
         {
-            int price = 0;
-            int[] array = new int[5];
-            _shoppingCart.ForEach(book => array[book.Episode - 1]++);
-
-            int numberOfDiffEpisode = 0;
-
-            do
-            {
-                numberOfDiffEpisode = 0;
-
-                numberOfDiffEpisode = Array.FindAll(array, x => x > 0).Length;
-                array = Array.ConvertAll(array, x => x - 1);
-
-                price += (int)(numberOfDiffEpisode * _potterOff[numberOfDiffEpisode] * _potterPrice);
-            } while (numberOfDiffEpisode != 0);
-
-            return price;
+            return _priceCalculator.GetPrice(_shoppingCart);
         }
 
         public void PutInShoppingCart(string bookName, int episode, int number)
@@ -50,10 +37,12 @@ namespace PotterShoppingCart.Tests
     [TestClass]
     public class PotterShoppingCartTest
     {
+        private readonly BookStoreFacotry _bookStoreFacotry = new BookStoreFacotry();
+
         [TestMethod]
         public void BuyFirstAndSecondPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -67,7 +56,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyFirstPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             var expected = 100;
@@ -80,7 +69,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyFirstAndSecondAndThirdPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -95,7 +84,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyFirstAndSecondAndThirdAndFourthPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -111,7 +100,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyAllPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -128,7 +117,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyFirstAndSecondAndTwoThirdPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -144,7 +133,7 @@ namespace PotterShoppingCart.Tests
         [TestMethod]
         public void BuyFirstAndTwoSecondAndTwoThirdPotter()
         {
-            var bookStore = GetBookStore();
+            var bookStore = _bookStoreFacotry.GetBookStore();
 
             PutOnePotterToShoppingCart(bookStore, 1);
             PutOnePotterToShoppingCart(bookStore, 2);
@@ -156,11 +145,6 @@ namespace PotterShoppingCart.Tests
             var actual = bookStore.Checkout();
 
             Assert.AreEqual(expected, actual);
-        }
-
-        private BookStore GetBookStore()
-        {
-            return new BookStore();
         }
 
         private void PutOnePotterToShoppingCart(BookStore bookStore, int episode)
