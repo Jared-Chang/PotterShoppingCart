@@ -116,6 +116,27 @@ namespace PotterShoppingCart.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void BuyTwoFirstAndTwoSecondAndTwoThirdAndTwoFourthAndFifthPotter()
+        {
+            var bookStore = _bookStoreFacotry.GetBookStore();
+
+            PutOnePotterToShoppingCart(bookStore, 1);
+            PutOnePotterToShoppingCart(bookStore, 1);
+            PutOnePotterToShoppingCart(bookStore, 2);
+            PutOnePotterToShoppingCart(bookStore, 2);
+            PutOnePotterToShoppingCart(bookStore, 3);
+            PutOnePotterToShoppingCart(bookStore, 3);
+            PutOnePotterToShoppingCart(bookStore, 4);
+            PutOnePotterToShoppingCart(bookStore, 4);
+            PutOnePotterToShoppingCart(bookStore, 5);
+            var expected = 695;
+
+            var actual = bookStore.Checkout();
+
+            Assert.AreEqual(expected, actual);
+        }
+
         private void PutOnePotterToShoppingCart(BookStore bookStore, int episode)
         {
             bookStore.PutInShoppingCart("Potter", episode, 1);
