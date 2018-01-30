@@ -21,6 +21,17 @@ namespace PotterShoppingCart.Tests
                     return 270;
 
                 case 4:
+                    int[] array = new int[5];
+                    _shoppingCart.ForEach(book => array[book.Episode]++);
+
+                    foreach (var i in array)
+                    {
+                        if (i > 1)
+                        {
+                            return 370;
+                        }
+                    }
+
                     return 320;
 
                 case 5:
@@ -40,7 +51,10 @@ namespace PotterShoppingCart.Tests
         {
             public Book(string bookName, int episode)
             {
+                Episode = episode;
             }
+
+            public int Episode { get; set; }
         }
     }
 
