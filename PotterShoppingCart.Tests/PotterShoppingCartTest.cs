@@ -3,42 +3,14 @@ using System.Collections.Generic;
 
 namespace PotterShoppingCart.Tests
 {
-    [TestClass]
-    public class PotterShoppingCartTest
-    {
-        private string _bookPotter = "Potter";
-
-        [TestMethod]
-        public void BuyFirstPotter()
-        {
-            var bookStore = new BookStore();
-
-            bookStore.PutInShoppingCart(_bookPotter, 1, 1);
-            var expected = 100;
-
-            var actual = bookStore.Checkout();
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void BuyFirstAndSecondPotter()
-        {
-            var bookStore = new BookStore();
-
-            bookStore.PutInShoppingCart(_bookPotter, 1, 1);
-            bookStore.PutInShoppingCart(_bookPotter, 2, 1);
-            var expected = 190;
-
-            var actual = bookStore.Checkout();
-
-            Assert.AreEqual(expected, actual);
-        }
-    }
-
     public class BookStore
     {
         private List<Book> _shoppingCart = new List<Book>();
+
+        public int Checkout()
+        {
+            return _shoppingCart.Count == 1 ? 100 : 190;
+        }
 
         public void PutInShoppingCart(string bookName, int episode, int number)
         {
@@ -51,15 +23,46 @@ namespace PotterShoppingCart.Tests
             {
             }
         }
+    }
 
-        public int Checkout()
+    [TestClass]
+    public class PotterShoppingCartTest
+    {
+        [TestMethod]
+        public void BuyFirstAndSecondPotter()
         {
-            if (_shoppingCart.Count == 1)
-                return 100;
-            else
-            {
-                return 190;
-            }
+            var bookStore = GetBookStore();
+
+            PutOnePotterToShoppingCart(bookStore, 1);
+            PutOnePotterToShoppingCart(bookStore, 2);
+            var expected = 190;
+
+            var actual = bookStore.Checkout();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void BuyFirstPotter()
+        {
+            var bookStore = GetBookStore();
+
+            PutOnePotterToShoppingCart(bookStore, 1);
+            var expected = 100;
+
+            var actual = bookStore.Checkout();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        private BookStore GetBookStore()
+        {
+            return new BookStore();
+        }
+
+        private void PutOnePotterToShoppingCart(BookStore bookStore, int episode)
+        {
+            bookStore.PutInShoppingCart("Potter", episode, 1);
         }
     }
 }
