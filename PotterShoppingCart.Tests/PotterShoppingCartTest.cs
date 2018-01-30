@@ -7,6 +7,7 @@ namespace PotterShoppingCart.Tests
     {
         private List<Book> _shoppingCart = new List<Book>();
         private readonly int _potterPrice = 100;
+        private readonly List<double> _potterOff = new List<double> { 1, 1, .95, .9, .8, .75 };
 
         public int Checkout()
         {
@@ -29,28 +30,7 @@ namespace PotterShoppingCart.Tests
                     }
                 }
 
-                switch (numberOfDiffEpisode)
-                {
-                    case 1:
-                        price += numberOfDiffEpisode * _potterPrice * 1;
-                        break;
-
-                    case 2:
-                        price += (int)(numberOfDiffEpisode * _potterPrice * 0.95);
-                        break;
-
-                    case 3:
-                        price += (int)(numberOfDiffEpisode * _potterPrice * 0.9);
-                        break;
-
-                    case 4:
-                        price += (int)(numberOfDiffEpisode * _potterPrice * 0.8);
-                        break;
-
-                    case 5:
-                        price += (int)(numberOfDiffEpisode * _potterPrice * 0.75);
-                        break;
-                }
+                price += (int)(numberOfDiffEpisode * _potterOff[numberOfDiffEpisode] * _potterPrice);
             } while (numberOfDiffEpisode != 0);
 
             return price;
