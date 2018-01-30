@@ -9,13 +9,12 @@ namespace PotterShoppingCart.Tests
 
         public int Checkout()
         {
-            GetPotterPrice(out var price);
-            return price;
+            return GetPotterPrice();
         }
 
-        private void GetPotterPrice(out int checkout)
+        private int GetPotterPrice()
         {
-            checkout = 0;
+            int price = 0;
             int[] array = new int[5];
             _shoppingCart.ForEach(book => array[book.Episode - 1]++);
 
@@ -37,26 +36,28 @@ namespace PotterShoppingCart.Tests
                 switch (numberOfDiffEpisode)
                 {
                     case 1:
-                        checkout += numberOfDiffEpisode * 100 * 1;
+                        price += numberOfDiffEpisode * 100 * 1;
                         break;
 
                     case 2:
-                        checkout += (int)(numberOfDiffEpisode * 100 * 0.95);
+                        price += (int)(numberOfDiffEpisode * 100 * 0.95);
                         break;
 
                     case 3:
-                        checkout += (int)(numberOfDiffEpisode * 100 * 0.9);
+                        price += (int)(numberOfDiffEpisode * 100 * 0.9);
                         break;
 
                     case 4:
-                        checkout += (int)(numberOfDiffEpisode * 100 * 0.8);
+                        price += (int)(numberOfDiffEpisode * 100 * 0.8);
                         break;
 
                     case 5:
-                        checkout += (int)(numberOfDiffEpisode * 100 * 0.75);
+                        price += (int)(numberOfDiffEpisode * 100 * 0.75);
                         break;
                 }
             } while (numberOfDiffEpisode != 0);
+
+            return price;
         }
 
         public void PutInShoppingCart(string bookName, int episode, int number)
