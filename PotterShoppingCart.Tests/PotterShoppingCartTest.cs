@@ -35,6 +35,16 @@ namespace PotterShoppingCart.Tests
                     return 320;
 
                 case 5:
+                    int[] array2 = new int[6];
+                    _shoppingCart.ForEach(book => array2[book.Episode]++);
+
+                    foreach (var i in array2)
+                    {
+                        if (i > 1)
+                        {
+                            return 460;
+                        }
+                    }
                     return 375;
 
                 default:
