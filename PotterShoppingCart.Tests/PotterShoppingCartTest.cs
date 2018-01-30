@@ -21,35 +21,62 @@ namespace PotterShoppingCart.Tests
                     return 270;
 
                 case 4:
-                    int[] array = new int[5];
-                    _shoppingCart.ForEach(book => array[book.Episode]++);
-
-                    foreach (var i in array)
-                    {
-                        if (i > 1)
-                        {
-                            return 370;
-                        }
-                    }
-
-                    return 320;
+                    GetPotterPrice(out var price1);
+                    return price1;
 
                 case 5:
-                    int[] array2 = new int[6];
-                    _shoppingCart.ForEach(book => array2[book.Episode]++);
-
-                    foreach (var i in array2)
-                    {
-                        if (i > 1)
-                        {
-                            return 460;
-                        }
-                    }
-                    return 375;
+                    GetPotterPrice(out var price2);
+                    return price2;
 
                 default:
                     return 0;
             }
+        }
+
+        private void GetPotterPrice(out int checkout)
+        {
+            checkout = 0;
+            int[] array = new int[5];
+            _shoppingCart.ForEach(book => array[book.Episode - 1]++);
+
+            int numberOfDiffEpisode = 0;
+
+            do
+            {
+                numberOfDiffEpisode = 0;
+
+                for (int j = 0; j < array.Length; j++)
+                {
+                    if (array[j] > 0)
+                    {
+                        array[j]--;
+                        numberOfDiffEpisode++;
+                    }
+                }
+
+                switch (numberOfDiffEpisode)
+                {
+                    case 1:
+                        checkout += numberOfDiffEpisode * 100 * 1;
+                        break;
+
+                    case 2:
+                        checkout += (int)(numberOfDiffEpisode * 100 * 0.95);
+                        break;
+
+                    case 3:
+                        checkout += (int)(numberOfDiffEpisode * 100 * 0.9);
+                        break;
+
+                    case 4:
+                        checkout += (int)(numberOfDiffEpisode * 100 * 0.8);
+                        break;
+
+                    case 5:
+                        checkout += (int)(numberOfDiffEpisode * 100 * 0.75);
+                        break;
+                }
+            } while (numberOfDiffEpisode != 0);
         }
 
         public void PutInShoppingCart(string bookName, int episode, int number)
