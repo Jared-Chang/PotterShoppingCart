@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BookStore.cs" />
     <Compile Include="BookStoreFacotry.cs" />
     <Compile Include="IPriceCalculator.cs" />
     <Compile Include="PotterPriceCalculator.cs" />
